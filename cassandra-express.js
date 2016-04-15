@@ -21,19 +21,19 @@ var deleteCoffeeShop = 'DELETE from businesses.coffee_shops WHERE email = ?';
 // GET all coffee shops
 coffeeShopRouter.get('/', function(req, res, next) {
     
-	client.execute(queryCoffeeShops, [], {prepare: true}, function(err, coffeeShops) {
+    client.execute(queryCoffeeShops, [], {prepare: true}, function(err, coffeeShops) {
         
-		if(err) {
+        if(err) {
             debug(err);
             next(err);
         } else {
-			
-			debug('Retrieved coffee shops successfully');
-		    return res.status(200).json(coffeeShops.rows)
-		    next();
+            debug('Retrieved coffee shops successfully');
+	    return res.status(200).json(coffeeShops.rows)
+	    next();
         };
         
-	});
+    });
+    
 });
 
 
@@ -48,10 +48,9 @@ coffeeShopRouter.get('/:id', function(req, res, next){
             debug(err);
             next(err);
         } else {
-			
-			debug('Retrieved coffee shop successfully');
-		    return res.status(200).json(coffeeShop.rows)
-		    next();
+	    debug('Retrieved coffee shop successfully');
+            return res.status(200).json(coffeeShop.rows)
+            next();
         };
 
     });
@@ -74,9 +73,9 @@ coffeeShopRouter.post('/addcoffeeshop', function(req, res, next) {
         email: req.body.email.toLowerCase(), 
         id: uuid
                 
-            };
+        };
 
-	client.execute(createNewCoffeeShop, params, {prepare: true}, function(err, result){
+    client.execute(createNewCoffeeShop, params, {prepare: true}, function(err, result){
 		
 		if (err) {
 			debug(err);
